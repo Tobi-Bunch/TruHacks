@@ -1,0 +1,122 @@
+#Tobi Bunch 3/23/2024
+
+import random
+import time
+
+def display_question(question, options):
+    print(question)
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+    start_time = time.time()
+    user_input = input("Enter your answer (1-4): ")
+    elapsed_time = time.time() - start_time
+    return int(user_input), elapsed_time
+
+def check_answer(user_answer, correct_answer):
+    if user_answer == correct_answer:
+        print("Correct!")
+        return True
+    else:
+        print("Incorrect. The correct answer is:", correct_answer)
+        return False
+
+def print_sources():
+    print("\nFor more information on how to help fight climate change, you can visit the following sources:")
+    print("- United Nations: https://www.un.org/en/climatechange/")
+    print("- Environmental Protection Agency: https://www.epa.gov/climatechange")
+    print("- World Wildlife Fund: https://www.worldwildlife.org/initiatives/climate")
+    print("- National Geographic: https://www.nationalgeographic.com/environment/global-warming/")
+    print("- Climate Reality Project: https://www.climaterealityproject.org/")
+
+def main():
+    questions = [
+        {"question": "What is the primary greenhouse gas responsible for climate change?",
+         "options": ["Carbon Dioxide", "Oxygen", "Nitrogen", "Methane"],
+         "correct_answer": 1},
+        {"question": "Which human activity is a major contributor to CO2 emissions?",
+         "options": ["Driving cars", "Eating meat", "Using plastic bags", "Watching TV"],
+         "correct_answer": 1},
+        {"question": "What is the main cause of rising sea levels?",
+         "options": ["Volcanic eruptions", "Melting glaciers", "Underwater earthquakes", "Oil spills"],
+         "correct_answer": 2},
+        {"question": "What is the most abundant gas in Earth's atmosphere?",
+         "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Argon"],
+         "correct_answer": 2},
+        {"question": "Which of the following is not a renewable energy source?",
+         "options": ["Solar power", "Wind power", "Coal", "Hydropower"],
+         "correct_answer": 3},
+        {"question": "What is the largest source of methane emissions worldwide?",
+         "options": ["Landfills", "Agriculture", "Natural gas production", "Wetlands"],
+         "correct_answer": 2},
+        {"question": "What is the term for the process of the Earth's temperature increasing over time?",
+         "options": ["Global cooling", "Climate fluctuation", "Global warming", "Ice age"],
+         "correct_answer": 3},
+        {"question": "Which region is most vulnerable to the impacts of climate change?",
+         "options": ["Arctic", "Sahara Desert", "Amazon Rainforest", "Antarctica"],
+         "correct_answer": 1},
+        {"question": "What is the primary driver of deforestation?",
+         "options": ["Urbanization", "Logging", "Mining", "Agriculture"],
+         "correct_answer": 4},
+        {"question": "What is the main cause of ocean acidification?",
+         "options": ["Carbon monoxide emissions", "Industrial pollution", "Fossil fuel combustion", "Excess carbon dioxide in the atmosphere"],
+         "correct_answer": 4},
+        {"question": "What percentage of global greenhouse gas emissions is attributable to the transportation sector?",
+         "options": ["10%", "25%", "50%", "75%"],
+         "correct_answer": 2},
+        {"question": "Which country is the largest emitter of carbon dioxide?",
+         "options": ["China", "United States", "India", "Russia"],
+         "correct_answer": 1},
+        {"question": "What is the main cause of coral reef degradation?",
+         "options": ["Ocean acidification", "Overfishing", "Plastic pollution", "Tourism"],
+         "correct_answer": 2},
+        {"question": "What is the term for the trapping of heat in the Earth's atmosphere by greenhouse gases?",
+         "options": ["Global dimming", "Solar radiation management", "Greenhouse effect", "Carbon sequestration"],
+         "correct_answer": 3},
+        {"question": "Which renewable energy source has the highest energy return on investment (EROI)?",
+         "options": ["Solar power", "Wind power", "Hydropower", "Biomass"],
+         "correct_answer": 2},
+        {"question": "What is the primary cause of the hole in the ozone layer?",
+         "options": ["Carbon emissions", "Chlorofluorocarbons (CFCs)", "Deforestation", "Nuclear testing"],
+         "correct_answer": 2},
+        {"question": "What is the primary cause of permafrost thawing?",
+         "options": ["Deforestation", "Industrial pollution", "Greenhouse gas emissions", "Volcanic activity"],
+         "correct_answer": 3},
+        {"question": "Which factor contributes most to urban heat island effect?",
+         "options": ["Green spaces", "Buildings", "Roads", "Vehicle emissions"],
+         "correct_answer": 2},
+        {"question": "What percentage of the world's electricity is generated from renewable sources?",
+         "options": ["10%", "25%", "50%", "75%"],
+         "correct_answer": 3},
+        {"question": "Which of the following is a positive feedback loop contributing to climate change?",
+         "options": ["Increased cloud cover", "Melting polar ice caps", "Afforestation", "Reduced deforestation"],
+         "correct_answer": 2}
+    ]
+
+    random.shuffle(questions)
+    num_questions = min(int(input("How many questions would you like to answer? ")), len(questions))
+    questions = questions[:num_questions]
+
+    score = 0
+    total_time = 0
+    for question_data in questions:
+        user_choice, elapsed_time = display_question(question_data["question"], question_data["options"])
+        correct_answer = question_data["correct_answer"]
+        is_correct = check_answer(user_choice, correct_answer)
+        total_time += elapsed_time
+        if is_correct:
+            score += 1
+    
+    print("\nQuiz complete!")
+    print("Your score:", score, "out of", len(questions))
+    print("Total time taken:", round(total_time, 2), "seconds")
+    if score == len(questions):
+        print("Congratulations! You got all the questions right!")
+    elif score >= len(questions) / 2:
+        print("Good job! You got more than half of the questions right.")
+    else:
+        print("You need more practice. Keep learning!")
+    
+    print_sources()
+
+if __name__ == "__main__":
+    main()
